@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="mafia42.js"></script>
+    <script>
+        const showMent = function(ment) {
+            document.getElementById('ment').innerText = ment;
+            return ment;
+        };
+
+        window.onload = function() {
+            mafia42.jobMent.police({
+                time: 2135,
+                tier: 5,
+                bluewhite: [3, 2],
+                maxpick: 8,
+                calcount: 4, // 이 수를 크게 하면 엄청 긴 직멘 생성 가능
+                actions: ['makeTypo', 'zip', showMent]
+            });
+            // 이렇게 actions에 콜백 함수를 지정하는 방식으로 사용해도 되고,
+            // 아니면 그냥 리턴값을 가져와서 사용해도 됩니다.
+        };
+    </script>
+    <title>Mafia42.js Test Page</title>
+</head>
+<body>
+    <h1>Mafia42.js Test Page</h1>
+    <b>Generated ment:</b> <span id="ment"></span>
+</body>
+</html>
