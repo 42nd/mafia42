@@ -8,5 +8,5 @@
 - 엽서 루블, 권위의 엽서 차감 명성 계산 기능
 
 추후 더욱 개선해나갈 예정입니다.
-처음 사용하시는 분들은 [docs.html](docs.html) 및 [test.html](test.html) 을 봐주시면 됩니다.<br />
+처음 사용하시는 분들은 [Docs 페이지](https://42nd.github.io/mafia42/docs.html) 및 [Test Page](https://42nd.github.io/mafia42/test.html)를 봐주시면 됩니다.<br />
 현재 docs 문서는 귀찮아서 손으로 작성한 상태
