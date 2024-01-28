@@ -1,10 +1,11 @@
 /**
- * mafia42.js
- * 문의: 디스코드 ID 'mafia42'
+ * mafia42.js - v0.3
+ * Made by 리트리버 겜미
+ * Discord ID: mafia42
  */
 
 
-const mafia42 = (function() {
+const mafia42 = (function () {
 	/**
 	 * Mafia42JSError는 mafia42.js에서 발생하는 오류입니다.
 	 * @extends Error
@@ -40,7 +41,7 @@ const mafia42 = (function() {
 		 * @param {number} number 각 자리 수를 더할 수
 		 * @returns 각 자리 수를 더한 수
 		 */
-		addTime: function(number) {
+		addTime: function (number) {
 			var ret = 0;
 			do {
 				ret += number % 10;
@@ -58,7 +59,7 @@ const mafia42 = (function() {
 		 * @param {string|false} primeMent - 소인수분해가 불가능할 경우의 멘트. {number}을 사용할 수 있으며 false일 시 ment를 생성합니다.
 		 * @return {string} - 소인수분해 직멘
 		*/
-		primeFac: function(
+		primeFac: function (
 			number,
 			sep = "x",
 			ment = "{number}소인수분해하면{result} 다더해서{sum} ",
@@ -78,7 +79,7 @@ const mafia42 = (function() {
 			function primeFactors(n) {
 				const factors = [];
 				let divisor = 2;
-			  
+
 				while (n >= 2) {
 					if (n % divisor == 0) {
 						factors.push(divisor);
@@ -115,15 +116,15 @@ const mafia42 = (function() {
 		/**
 		 * 경찰 직멘을 jobMentGen을 이용해 생성합니다.
 		 * @param {object} options - 옵션
-		 * @param {number} options.time - 현재 배정시간(대부분 HHMM형태), 반드시 Number
+		 * @param {number} options.time - 현재 배정시간(대부분 HHMM형태)
 		 * @param {number?} options.tier - 카드 티어
 		 * @param {number[]?} options.bluewhite - [파란공개수, 흰공개수]의 배열
 		 * @param {number?} options.maxpick - 최대 픽 수
-		 * @param {number?} options.calcount - 연산할 횟수 (이 값이 클수록 직멘 길이는 자연스럽게 길어짐, 2~4 추천)
-		 * @param {(string|function)[]?} options.actions - return 이전 멘트에 실행할 함수 목록. makeTypo, zip 문자열을 넣어도 알아서 처리해줌. 한 함수를 실행한 뒤 리턴값을 다음 함수의 파라미터로 이용. 최종적인 이 함수의 리턴값은 마지막 실행 함수의 리턴값과 동일함.
+		 * @param {number?} options.calcount - 연산할 횟수
+		 * @param {(string|function)[]?} options.actions - return 이전 멘트에 실행할 함수 목록. 문자열은 makeTypo, zip 사용가능
 		 * @returns {string?} - 멘트
 		 */
-		police: function(
+		police: function (
 			options = {}
 		) {
 			const time = options.time;
@@ -135,19 +136,24 @@ const mafia42 = (function() {
 
 			// 간단하게 미리 lotto 생성하여 사용, 추후 개선 여지 있음
 			const lotto = {
-				0: ["끝자리0옆집로또1회첫번호10",10],
-				1: ["끝자리1로또1회첫번호10",10],
-				2: ["끝자리2로또2회첫번호9",9],
-				3: ["끝자리3로또3회첫번호11",11],
-				4: ["끝자리4로또4회첫번호14",14],
-				5: ["끝자리5로또5회첫번호16",16],
-				6: ["끝자리6로또6회첫번호14",14],
-				7: ["끝자리7로또7회보너스42",42],
-				8: ["끝자리8로또8회첫번호8",8],
-				9: ["끝자리9로또9회보너스14",14]
+				0: ["끝자리0옆집1회로또첫번호10", 10],
+				1: ["끝자리1회로또첫번호10", 10],
+				2: ["끝자리2회로또첫번호9", 9],
+				3: ["끝자리3회로또첫번호11", 11],
+				4: ["끝자리4회로또첫번호14", 14],
+				5: ["끝자리5회로또첫번호16", 16],
+				6: ["끝자리6회로또첫번호14", 14],
+				7: ["끝자리7회로또보너스42", 42],
+				8: ["끝자리8회로또첫번호8", 8],
+				9: ["끝자리9회로또보너스14", 14]
 			};
 
 			const addTime = jobMentGen.addTime(time);
+			if (addTime == 0) {
+				// 0ㄴㅁ이 될수있는 경우의 처리
+				return `배정${time} 다더하면 0이라 옆집 1ㄴㅁ`;
+			}
+
 			var ment = `배정${time} 다더하고 `;
 			var nowNum = addTime;
 
@@ -161,32 +167,32 @@ const mafia42 = (function() {
 					// 다음에 넣을 연산 기본 후보
 					var next = [
 						// v0.2: 소인수분해 불가 멘트 대신 다더하는 멘트로 변경
-						jobMentGen.primeFac(nowNum, "x", "소인수분해={result}다더해{sum}", 
+						jobMentGen.primeFac(nowNum, "x", "소인수분해={result}다더해{sum}",
 							`또다더하면${jobMentGen.addTime(nowNum)}`),
 						// (끝자리)번째 로또번호
 						lotto[nowNum % 10],
 						// 중항이 자연수가 아닐경우 다더하는 멘트로 처리
 						(nowNum % 2 != 0 ? [`등차수열1,x,${nowNum}중항은${(nowNum + 1) / 2}`, (nowNum + 1) / 2]
 							: (nowNum > 10 ? [`다더해서${jobMentGen.addTime(nowNum)}`, jobMentGen.addTime(nowNum)]
-									: [`시간합에또더해${addTime + nowNum}`, addTime + nowNum]))
+								: [`시간합에또더해${addTime + nowNum}`, addTime + nowNum]))
 					];
 					if (tier) {
 						// 티어 곱하는 직멘 후보
 						next.push([`${tier}티어라${tier}곱하고`, nowNum * tier]);
-						next.push([`${tier}티어라${tier}로나눔나머지${nowNum % tier}`, nowNum % tier]);
+						next.push([`${tier}티어라${tier}로나눔나머지${nowNum % tier},`, nowNum % tier]);
 					}
 					if (bluewhite.length) {
 						// 파란공개수, 흰공개수 곱하는 직멘 후보
-						next.push([`파공${bluewhite[0]}흰공${bluewhite[1]}곱하고더해${bluewhite[0] * bluewhite[1] + nowNum}`,
-							bluewhite[0] * bluewhite[1] + nowNum]);
+						next.push([`파공${bluewhite[0]}흰공${bluewhite[1]}곱하고더해${bluewhite[0] * bluewhite[1] + nowNum},`,
+						bluewhite[0] * bluewhite[1] + nowNum]);
 
 						if (nowNum - bluewhite[0] < 1) {
-							next.push([`흰공${bluewhite[1]}제곱후더해${bluewhite[1] * bluewhite[1] + nowNum}`,
-								bluewhite[1] * bluewhite[1] + nowNum]);
+							next.push([`흰공${bluewhite[1]}제곱후더해${bluewhite[1] * bluewhite[1] + nowNum},`,
+							bluewhite[1] * bluewhite[1] + nowNum]);
 						} else {
 							// 파공개수 빼는 직멘
-							next.push([`파공${bluewhite[0]}개빼면${nowNum - bluewhite[0]}`,
-								nowNum - bluewhite[0]]);
+							next.push([`파공${bluewhite[0]}개빼면${nowNum - bluewhite[0]},`,
+							nowNum - bluewhite[0]]);
 						}
 					}
 					next = choose(next);
@@ -195,7 +201,7 @@ const mafia42 = (function() {
 					nowNum = next[1];
 				}
 				if (nowNum <= 3) {
-					next.push([`시간합에또더해${addTime + nowNum}`, addTime + nowNum]);
+					next.push([`시간합에또더해${addTime + nowNum}/`, addTime + nowNum]);
 				}
 			}
 			// 멘트 끊김 방지
@@ -247,8 +253,8 @@ const mafia42 = (function() {
 		 * @param {number} count - 최대 오타 생성 개수
 		 * @returns {string} - 오타가 생성된 직업 멘트
 		 */
-		makeTypo: function(ment, count = 2) {
-			ment = ment.replace(/개|루트|다더해서/g, function(s) {
+		makeTypo: function (ment, count = 2) {
+			ment = ment.replace(/개|루트|다더해서/g, function (s) {
 				if (count) {
 					count--;
 					if (s == "개") {
@@ -269,7 +275,7 @@ const mafia42 = (function() {
 		 * @param {string} ment - 길이를 줄일 직업 멘트
 		 * @returns {string} - 길이가 줄어든 직업 멘트
 		 */
-		zip: function(ment) {
+		zip: function (ment) {
 			if (ment.length > 30) {
 				ment = ment.replace(/ /g, "");
 			}
@@ -286,7 +292,7 @@ const mafia42 = (function() {
 		 * @param {number} rerollCount - 무한루프를 방지하기 위한 최대 재시도 횟수
 		 * @returns {string} - 생성된 경찰 직멘
 		 */
-		rerollLimit: function(
+		rerollLimit: function (
 			options = {},
 			minlength = 25,
 			maxlength = 50,
@@ -295,7 +301,7 @@ const mafia42 = (function() {
 			rerollCount = 20
 		) {
 			if (!rerollCount) {
-				throw new Mafia42JSError("Failed to generate jobMent for {rerollCount} times");
+				throw new Mafia42JSError("Failed to generate jobMent for rerollCount times");
 			}
 
 			var ments = [];
@@ -303,7 +309,7 @@ const mafia42 = (function() {
 				options.calcount = i;
 				ments.push(jobMent.police(options));
 			}
-			ments = ments.filter(function(ment) {
+			ments = ments.filter(function (ment) {
 				return ment.length >= minlength && ment.length <= maxlength;
 			});
 			if (ments.length == 0) {
@@ -313,12 +319,11 @@ const mafia42 = (function() {
 		}
 	};
 
-
-    /** 
-     * 엽서의 루블 등을 계산하는 함수들입니다.
-     */
+	/** 
+	 * 엽서의 루블 등을 계산하는 함수들입니다.
+	 */
 	const postcard = {
-        /**
+		/**
          * 엽서의 루블을 계산합니다.
          * @param {number} fame - 엽서의 명성
          * @param {number} days - 엽서의 기간
@@ -326,7 +331,7 @@ const mafia42 = (function() {
          */
 		rubles: (fame, days) => fame * 100 * days,
 
-        /**
+		/**
          * 권위의 엽서의 명성을 계산합니다.
          * @param {number} senderFame - 보내는 사람의 명성
          * @returns {number} - 상대방이 차감되는 명성
@@ -335,19 +340,39 @@ const mafia42 = (function() {
 			const ret = -Math.floor(20 + 1.2 * Math.sqrt(senderFame))
 			return ret ? ret : -20;
 		},
+
+		/**
+		 * 지정된 칸만큼 우체통을 늘리기 위해 필요한 루블을 계산합니다.
+		 * @param {number} currentLimit - 현재 우체통 크기
+		 * @param {number} numberToIncrease - 늘릴 칸 수 
+		 * @returns {number} - 필요한 루블
+		 */
+		reqRubToIncLim: (currentLimit, numberToIncrease = 10) => {
+			if (currentLimit < 42 || currentLimit % 10 != 2) {
+				throw new Mafia42JSError("currentLimit must be bigger than 41 and multiple of 10 plus 2");
+			}
+			if (numberToIncrease % 10 != 0) {
+				throw new Mafia42JSError("numberToIncrease must be multiple of 10");
+			}
+
+			let result = (currentLimit - 32) * 1000;
+			if (numberToIncrease > 10) {
+				result += mafia42.postcard.reqRubToIncLim(currentLimit + 10, numberToIncrease - 10);
+			}
+			return result;
+		}
 	}
-	
+
 
 	return {
 		MAX_CHAT_LENGTH: 64,
-		//
 		//
 		jobMent: jobMent,
 		jobMentGen: jobMentGen,
 		//
 		Mafia42JSError: Mafia42JSError,
 		//
-		postcard: postcard
+		postcard: postcard,
 	}
 })();
 
