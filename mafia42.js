@@ -1,5 +1,5 @@
 /**
- * mafia42.js - v0.3
+ * mafia42.js - v0.3.1
  * Made by 리트리버 겜미
  * Discord ID: mafia42
  */
