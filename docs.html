@@ -1,4 +1,4 @@
-<!-- 귀찮아서 일단 손으로 작성해둠 -->
+<!-- 귀찮아서 일단 손으로 작성해둔 Docs입니다. -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,7 @@
 </head>
 <body>
 	<h1>Mafia42.js Docs</h1>
-	version: v0.2<br />
+	version: v0.3<br />
 	Mafia42.js는 쉽게 마피아42의 여러 기능을 사용할 수 있도록 만든 Javascript 라이브러리입니다.<br />
 	혹시 Docs에 빠진 부분이 있다면 디스코드 mafia42로 제보 부탁드립니다.<br />
 	<!-- -->
@@ -45,12 +45,12 @@
 
 	<h2>mafia42.jobMent</h2>
 
-	<h3>mafia42.jobMent.makeTypo(ment: string, count?: number): string</h3>
+	<h3>mafia42.jobMent.makeTypo(ment: string, count: number?): string</h3>
 	직멘에 사실적인 오타를 추가해 복사-붙여넣기시 보다 사실적으로 만듭니다.<br />
 	<dl>
 		<dt>ment: string</dt>
 		<dd>오타를 추가할 직멘</dd>
-		<dt>count?: number</dt>
+		<dt>count: number?</dt>
 		<dd>오타를 추가할 횟수입니다. 기본값은 2입니다.</dd>
 		<dt>@return: string</dt>
 		<dd>오타가 추가된 직멘이 반환됩니다.</dd>
@@ -58,11 +58,11 @@
 
 	<h3>mafia42.jobMent.police(options: {
         time: number,
-        tier?: number,
-        bluewhite?: number[],
-        maxpick?: number,
-        calcount?: number,
-        actions?: (string | function)[]
+        tier: number?;
+        bluewhite: number[]?;
+        maxpick: number?;
+        calcount: number?;
+        actions: (string | function)[]?
     }) =&gt; string</h3>
 	경찰 직멘을 생성합니다.<br />
 	<b>사용 예시</b><br />
@@ -86,27 +86,27 @@ console.log(ment);
 					배정 시간입니다. 대부분은 HHMM 형식입니다.<br />
 					ex - 1114, 2135, 908
 				</dd>
-				<dt>tier?: number</dt>
+				<dt>tier: number?</dt>
 				<dd>
 					티어입니다. 1~6까지 있습니다.<br />
 					입력되어 있을 경우 직멘 연산에 사용됩니다.
 				</dd>
-				<dt>bluewhite?: number[]</dt>
+				<dt>bluewhite: number[]?</dt>
 				<dd>
 					[파란공개수, 흰공개수]의 배열입니다.<br />
 					입력되어 있을 경우 직멘 연산에 사용됩니다.
 				</dd>
-				<dt>maxpick?: number</dt>
+				<dt>maxpick: number?</dt>
 				<dd>
 					최대 픽 수입니다.<br />
 					해당 픽 수를 초과하는 조결은 나오지 않습니다.
 				</dd>
-				<dt>calcount?: number</dt>
+				<dt>calcount: number?</dt>
 				<dd>
 					연산 횟수입니다.<br />
 					해당 횟수만큼 직멘에 연산을 수행합니다.
 				</dd>
-				<dt>actions?: (string | function)[]</dt>
+				<dt>actions: (string | function)[]?</dt>
 				<dd>
 					직멘 생성을 마친 뒤, 직멘을 인수로 하여 실행할 함수들의 배열입니다.<br />
 					앞에서부터 실행하며, 반환값은 수정된 직멘이 됩니다.<br />
@@ -123,25 +123,25 @@ console.log(ment);
 
 	<h3>mafia42.jobMent.rerollLimit(
 		options: object,
-		minlength?: number,
-		maxlength?: number,
-		minop?: number,
-		maxop?: number,
-		rerollCount?: number
+		minlength: number?,
+		maxlength: number?,
+		minop: number?,
+		maxop: number?,
+		rerollCount: number?
 	): string</h3>
 	특정 조건에 맞는 경찰 직멘을 생성합니다. <span>!rerollCount</span>일 경우 오류를 냅니다.<br />
 	<dl>
 		<dt>options: object</dt>
 		<dd>직멘 옵션입니다. <span>mafia42.jobMent.police</span>의 options와 동일합니다.</dd>
-		<dt>minlength?: number</dt>
+		<dt>minlength: number?</dt>
 		<dd>직멘의 최소 길이입니다. 기본값은 25입니다.</dd>
-		<dt>maxlength?: number</dt>
+		<dt>maxlength: number?</dt>
 		<dd>직멘의 최대 길이입니다. 기본값은 50입니다.</dd>
-		<dt>minop?: number</dt>
+		<dt>minop: number?</dt>
 		<dd>직멘에 포함되어야 하는 연산의 최소 개수입니다. 기본값은 1입니다.</dd>
-		<dt>maxop?: number</dt>
+		<dt>maxop: number?</dt>
 		<dd>직멘에 포함되어야 하는 연산의 최대 개수입니다. 기본값은 2입니다.</dd>
-		<dt>rerollCount?: number</dt>
+		<dt>rerollCount: number?</dt>
 		<dd>재생성 시도 횟수입니다. 기본값은 20입니다.<br />
 		무한 루프를 방지하기 위하여 지정된 횟수만큼 생성에 실패하면 오류를 냅니다.</dd>
 		<dt>@return: string</dt>
@@ -177,11 +177,11 @@ console.log(ment);
 	<dl>
 		<dt>number: number</dt>
 		<dd>소인수분해할 수</dd>
-		<dt>sep?: string</dt>
+		<dt>sep: string?</dt>
 		<dd>소인수분해 결과인 수들 사이에 넣을 문자열</dd>
-		<dt>ment?: string</dt>
+		<dt>ment: string?</dt>
 		<dd>소인수분해에 성공했을 때 반환할 문자열. {number}, {result}, {sum}을 사용할 수 있습니다.</dd>
-		<dt>primeMent?: string | false</dt>
+		<dt>primeMent: (string | false)?</dt>
 		<dd>
 			소인수분해에 실패했을 때 반환할 문자열. false로 설정하면 소인수분해에 실패했을 때도 ment를 반환합니다.<br />
 			{ment}를 사용할 수 있습니다.
@@ -221,6 +221,18 @@ console.log(ment);
 		<dd>계산할 엽서의 기간</dd>
 		<dt>@return: number</dt>
 		<dd>엽서로 얻을 수 있는 루블의 수치입니다.</dd>
+	</dl>
+
+	<h3>mafia42.postcard.reqRubToIncLim(currentLimit: number, numberToIncrease: number? = 10): number</h3>
+	현재 우체통이 <span>currentLim</span>칸일 때, <span>numberToIncrease</span> 칸을 늘리기 위한 루블을 계산합니다.<br />
+	<span>currentLimit &lt; 42 || currentLimit % 10 != 2 || numberToIncrease % 10 != 0</span>일 경우 오류를 냅니다.<br />
+	<dl>
+		<dt>currentLimit: number</dt>
+		<dd>현재 우체통의 칸 수</dd>
+		<dt>numberToIncrease: number? = 10</dt>
+		<dd>늘릴 칸 수</dd>
+		<dt>@return: number</dt>
+		<dd>늘리기 위해 필요한 루블의 수치입니다.</dd>
 	</dl>
 </body>
 </html>
