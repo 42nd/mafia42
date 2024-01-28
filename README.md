@@ -6,6 +6,7 @@
 기능은 다음과 같습니다.
 - 경찰 직멘 생성 기능
 - 엽서 루블, 권위의 엽서 차감 명성 계산 기능
+- 우체통 계산 기능
 
 추후 더욱 개선해나갈 예정입니다.
 처음 사용하시는 분들은 [Docs 페이지](https://42nd.github.io/mafia42/docs.html) 및 [Test Page](https://42nd.github.io/mafia42/test.html)를 봐주시면 됩니다.<br />
