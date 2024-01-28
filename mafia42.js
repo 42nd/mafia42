@@ -360,6 +360,16 @@ const mafia42 = (function () {
 				result += mafia42.postcard.reqRubToIncLim(currentLimit + 10, numberToIncrease - 10);
 			}
 			return result;
+		},
+
+		/**
+		 * 현재 우체통에서 목표 우체통까지 올리는 데 필요한 루블을 계산합니다.
+		 * @param {number} currentLimit - 현재 우체통 크기
+		 * @param {number} targetLimit - 목표 우체통 크기
+		 * @returns {number} - 필요한 루블
+		 */
+		reqRubToLim: (currentLimit, targetLimit) => {
+			return mafia42.postcard.reqRubToIncLim(currentLimit, targetLimit - currentLimit);
 		}
 	}
 
