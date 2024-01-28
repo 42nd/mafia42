@@ -17,7 +17,7 @@
 			background-color: lightyellow;
 		}
 
-		h3, span, .name {
+		h3, span:not(code span), .name {
 			background-color: #EAEAEA;
 		}
 	</style>
@@ -37,7 +37,7 @@
 </head>
 <body>
 	<h1>Mafia42.js Docs</h1>
-	version: v0.3<br />
+	version: v0.3.1<br />
 	Mafia42.js는 쉽게 마피아42의 여러 기능을 사용할 수 있도록 만든 Javascript 라이브러리입니다.<br />
 	혹시 Docs에 빠진 부분이 있다면 디스코드 mafia42로 제보 부탁드립니다.<br />
 	<!-- -->
@@ -70,7 +70,7 @@
 <code class="js">const ment = mafia42.jobMent.police({
 	time: 2215,
 	tier: 5,
-	blackwhite: [3, 2],
+	bluewhite: [3, 2],
 	actions: ["makeTypo", "zip"]
 });
 console.log(ment);
@@ -224,13 +224,24 @@ console.log(ment);
 	</dl>
 
 	<h3>mafia42.postcard.reqRubToIncLim(currentLimit: number, numberToIncrease: number? = 10): number</h3>
-	현재 우체통이 <span>currentLim</span>칸일 때, <span>numberToIncrease</span> 칸을 늘리기 위한 루블을 계산합니다.<br />
+	현재 우체통이 <span>currentLimit</span>칸일 때, <span>numberToIncrease</span>칸을 늘리기 위한 루블을 계산합니다.<br />
 	<span>currentLimit &lt; 42 || currentLimit % 10 != 2 || numberToIncrease % 10 != 0</span>일 경우 오류를 냅니다.<br />
 	<dl>
 		<dt>currentLimit: number</dt>
 		<dd>현재 우체통의 칸 수</dd>
 		<dt>numberToIncrease: number? = 10</dt>
 		<dd>늘릴 칸 수</dd>
+		<dt>@return: number</dt>
+		<dd>늘리기 위해 필요한 루블의 수치입니다.</dd>
+	</dl>
+
+	<h3>mafia42.postcard.reqRubToLim(currentLimit: number, targetLimit: number): number</h3>
+	현재 우체통이 <span>currentLimit</span>칸일 때, <span>targetLimit</span>칸까지 늘리기 위한 루블을 계산합니다.<br />
+	<dl>
+		<dt>currentLimit: number</dt>
+		<dd>현재 우체통의 칸 수</dd>
+		<dt>targetLimit: number</dt>
+		<dd>목표 칸 수</dd>
 		<dt>@return: number</dt>
 		<dd>늘리기 위해 필요한 루블의 수치입니다.</dd>
 	</dl>
