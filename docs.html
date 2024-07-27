@@ -37,11 +37,21 @@
 </head>
 <body>
 	<h1>Mafia42.js Docs</h1>
-	version: v0.3.1<br />
-	Mafia42.js는 쉽게 마피아42의 여러 기능을 사용할 수 있도록 만든 Javascript 라이브러리입니다.<br />
-	혹시 Docs에 빠진 부분이 있다면 디스코드 mafia42로 제보 부탁드립니다.<br />
+	version: v0.4<br />
 	<!-- -->
 
+	<h2>mafia42.color</h2>
+
+	<h3>mafia42.color.ARGBtoRGB(argb: number): number</h3>
+	ARGB 컬러 코드를 RGB 컬러 코드로 변합니다.<br />
+	<dl>
+		<dt>argb: number</dt>
+		<dd>ARGB 컬러 코드</dd>
+		<dt>@return: number</dt>
+		<dd>RGB 컬러 코드</dd>
+	</dl>
+
+	<!-- -->
 
 	<h2>mafia42.jobMent</h2>
 
@@ -195,6 +205,20 @@ console.log(ment);
 
 	<!-- -->
 
+	<h2>mafia42.judoProb</h2>
+
+	<h3>mafia42.judoProb.getPercent(expression: string): number</h3>
+	주어진 식에 따라 주사위 엽서 도박 확률을 계산합니다.<br />
+	관련 내용은 <a href="https://42nd.kr/judo">https://42nd.kr/judo</a> 참고 바랍니다.<br />
+	<dl>
+		<dt>expression: string</dt>
+		<dd>주사위 엽서 도박 확률 계산 조건식</dd>
+		<dt>@return: number</dt>
+		<dd>주사위 엽서 도박 확률</dd>
+	</dl>
+
+	<!-- -->
+
 	<h2 class="name">mafia42.MAX_CHAT_LENGTH: number</h2>
 	마피아42의 채팅 최대 글자 수입니다. 64이며, 다른 함수에 의해 변경되지 않습니다.<br />
 
@@ -245,5 +269,44 @@ console.log(ment);
 		<dt>@return: number</dt>
 		<dd>늘리기 위해 필요한 루블의 수치입니다.</dd>
 	</dl>
+
+	<h3>mafia42.postcard.getDailyRewardRuble(fame: number, guildLevel: number, guildUserCount: number, guildBuilding: number, celebrity: boolean, plateBonus: boolean): number</h3>
+	현재 명성이 <span>fame</span>, 길드 레벨(우드~마스터: 1~6)이 <span>guildLevel</span>, 길드 인원 수가 <span>guildUserCount</span>,
+	길드 빌딩 레벨이 <span>guildBuilding</span>이고, 유명세 버프 여부(bool)가 <span>celebrity</span>,
+	'황금알을 낳는 거위' 착용 여부(bool)가 <span>plateBonus</span>일 때, 출석보상 루블을 계산합니다.<br />
+	<b>사용 예시</b>
+<pre>
+<code class="js">const rub = mafia42.postcard.getDailyRewardRuble(
+	840, 4, 42, 6, true, false
+);
+console.log(rub);
+</code>
+</pre>
+	<dl>
+		<dt>fame: number</dt>
+		<dd>명성</dd>
+		<dt>guildLevel: number</dt>
+		<dd>길드 레벨</dd>
+		<dt>guildUserCount: number</dt>
+		<dd>길드 인원 수</dd>
+		<dt>guildBuilding: number</dt>
+		<dd>길드 빌딩 레벨</dd>
+		<dt>celebrity: boolean</dt>
+		<dd>유명세 버프 여부</dd>
+		<dt>plateBonus: boolean</dt>
+		<dd>'황금알을 낳는 거위' 착용 여부</dd>
+		<dt>@return: number</dt>
+		<dd>출석보상 루블</dd>
+	</dl>
+
+	<h3>mafia42.postcard.getDailyRewardLuna(fame: number): number</h3>
+	현재 명성이 <span>fame</span>일 때, 출석 보상으로 받는 보너스 루나를 계산합니다.<br />
+	<dl>
+		<dt>fame: number</dt>
+		<dd>명성</dd>
+		<dt>@return: number</dt>
+		<dd>출석보상 루나</dd>
+	</dl>
 </body>
 </html>
+
